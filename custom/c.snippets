@@ -1,0 +1,21 @@
+###########################################################################
+#                             Custom Snippets                             #
+###########################################################################
+
+priority 100
+
+global !p
+def header_guard(fn):
+	import string
+	name = re.sub(r'[^A-Za-z0-9]+','_', fn).upper()
+	return ('_%s_' % (name, )).upper()
+endglobal
+
+snippet once "Include header once only guard"
+#ifndef `!p snip.rv = header_guard(snip.fn)`
+#define `!p snip.rv = header_guard(snip.fn)`
+
+${VISUAL}${0}
+
+#endif /* `!p snip.rv = header_guard(snip.fn)` */
+endsnippet
